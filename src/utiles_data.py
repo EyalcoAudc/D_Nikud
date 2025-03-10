@@ -283,7 +283,7 @@ def combine_sentences(list_sentences, max_length=0, is_train=False):
 
 
 class NikudDataset(Dataset):
-    def __init__(self, tokenizer, folder=None, file=None, logger=None, max_length=0, is_train=False):
+    def __init__(self, tokenizer, folder=None, file=None, data_list=None, logger=None, max_length=0, is_train=False):
         self.max_length = max_length
         self.tokenizer = tokenizer
         self.is_train = is_train
@@ -291,6 +291,8 @@ class NikudDataset(Dataset):
             self.data, self.origin_data = self.read_data_folder(folder, logger)
         elif file is not None:
             self.data, self.origin_data = self.read_data(file, logger)
+        elif data_list is not None:
+            self.data, self.origin_data = self.read_data_list(data_list, logger)
         self.prepered_data = None
 
     def read_data_folder(self, folder_path: str, logger=None):
@@ -312,19 +314,24 @@ class NikudDataset(Dataset):
             all_origin_data.extend(origin_data)
         return all_data, all_origin_data
 
+
     def read_data(self, filepath: str, logger=None) -> List[Tuple[str, list]]:
         msg = f"read file: {filepath}"
         if logger:
             logger.debug(msg)
         else:
             print(msg)
-        data = []
-        orig_data = []
         with open(filepath, 'r', encoding='utf-8') as file:
             file_data = file.read()
         data_list = self.split_text(file_data)
+        data, orig_data = self.read_data_list(data_list, logger)
+        return data, orig_data
 
-        for sen in tqdm(data_list, desc=f"Source: {os.path.basename(filepath)}"):
+
+    def read_data_list(self, data_list: list, logger=None) -> List[Tuple[str, list]]:
+        data = []
+        orig_data = []
+        for sen in tqdm(data_list, desc="read data list"):
             if sen == "":
                 continue
 
@@ -363,6 +370,7 @@ class NikudDataset(Dataset):
             orig_data.append(text_org)
 
         return data, orig_data
+
 
     def split_text(self, file_data):
         file_data = file_data.replace("\n", f"\n{unique_key}")

@@ -89,7 +89,6 @@ pynndescent==0.5.10
 pyparsing==3.1.0
 python-dateutil==2.8.2
 pytz==2023.3
-pywin32==306
 PyYAML==6.0
 pyzmq==25.1.0
 regex==2023.6.3
@@ -119,15 +118,15 @@ tensorboard==2.13.0
 tensorboard-data-server==0.7.1
 tensorflow==2.13.0
 tensorflow-estimator==2.13.0
-tensorflow-intel==2.13.0
+tensorflow-intel
 tensorflow-io-gcs-filesystem==0.31.0
 termcolor==2.3.0
 thinc==8.1.10
 threadpoolctl==3.1.0
 tokenizers==0.13.3
-torch==2.1.0.dev20230623+cu121
-torchaudio==2.1.0.dev20230623+cu121
-torchvision==0.16.0.dev20230624+cu121
+torch==2.1.0
+torchaudio==2.1.0
+torchvision==0.16.0
 torchviz==0.0.2
 tornado==6.3.2
 tqdm==4.65.0
@@ -145,3 +144,4 @@ Werkzeug==2.3.6
 widgetsnbextension==4.0.8
 wrapt==1.15.0
 yarg==0.1.9
+flask

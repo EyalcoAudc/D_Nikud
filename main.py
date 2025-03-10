@@ -2,6 +2,7 @@
 import argparse
 import os
 import sys
+import time
 from datetime import datetime
 import logging
 from logging.handlers import RotatingFileHandler
@@ -22,7 +23,7 @@ from src.utiles_data import NikudDataset, Nikud, create_missing_folders, \
     extract_text_to_compare_nakdimon
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
-assert DEVICE == 'cuda'
+# assert DEVICE == 'cuda'
 
 
 def get_logger(log_level, name_func, date_time=datetime.now().strftime('%d_%m_%y__%H_%M')):
@@ -82,10 +83,20 @@ def evaluate_text(path, dnikud_model, tokenizer_tavbert, logger, plots_folder=No
 def predict_text(text_file, tokenizer_tavbert, output_file, logger, dnikud_model, compare_nakdimon=False):
     dataset = NikudDataset(tokenizer_tavbert, file=text_file, logger=logger, max_length=MAX_LENGTH_SEN)
 
+    # Start time
+    start_time = time.time()
+
     dataset.prepare_data(name="prediction")
     mtb_prediction_dl = torch.utils.data.DataLoader(dataset.prepered_data, batch_size=BATCH_SIZE)
     all_labels = predict(dnikud_model, mtb_prediction_dl, DEVICE)
     text_data_with_labels = dataset.back_2_text(labels=all_labels)
+
+    # End time
+    end_time = time.time()
+
+    # Calculate elapsed time
+    elapsed_time = end_time - start_time
+    print(f"Execution time: {elapsed_time:.6f} seconds")
 
     if output_file is None:
         for line in text_data_with_labels:
@@ -366,7 +377,7 @@ if __name__ == '__main__':
         dnikud_model = DNikudModel(config, len(Nikud.label_2_id["nikud"]), len(Nikud.label_2_id["dagesh"]),
                                    len(Nikud.label_2_id["sin"]), device=DEVICE).to(DEVICE)
         state_dict_model = dnikud_model.state_dict()
-        state_dict_model.update(torch.load(args.pretrain_model_path))
+        state_dict_model.update(torch.load(args.pretrain_model_path, map_location=DEVICE))
         dnikud_model.load_state_dict(state_dict_model)
     else:
         base_model_name = "tau/tavbert-he"

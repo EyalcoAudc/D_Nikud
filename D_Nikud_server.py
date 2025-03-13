@@ -117,4 +117,4 @@ def predict_text():
     return jsonify({"diacritized_text": text_data_with_labels})
 
 if __name__ == "__main__":
-    app.run(host="10.4.2.145", port=5000)
+    app.run(host="0.0.0.0", port=5000)

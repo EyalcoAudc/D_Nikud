@@ -36,7 +36,7 @@ google-pasta==0.2.0
 graphviz==0.20.1
 grpcio==1.56.2
 h5py==3.9.0
-huggingface-hub==0.15.1
+huggingface-hub==0.23.0
 idna==3.4
 ipykernel==6.24.0
 ipython==8.14.0

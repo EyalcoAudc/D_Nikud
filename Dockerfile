@@ -10,7 +10,7 @@ COPY . /app
 # Install required dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-export HF_ENDPOINT=https://hf-mirror.com
+ENV HF_ENDPOINT=https://hf-mirror.com
 
 # Expose the port that Flask runs on
 EXPOSE 5000

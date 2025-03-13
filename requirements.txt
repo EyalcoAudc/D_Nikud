@@ -145,3 +145,6 @@ widgetsnbextension==4.0.8
 wrapt==1.15.0
 yarg==0.1.9
 flask
+diffusers
+accelerate
+peft

@@ -154,3 +154,10 @@ This script utilizes the D-Nikud model developed by [Adi Rosenthal](https://gith
 ## License
 
 This code is provided under the [MIT License](https://www.mit.edu/~amini/LICENSE.md). You are free to use, modify, and distribute the code according to the terms of the license.
+
+## Run As Docker
+
+To run the docker run the following commands:
+
+1. sudo docker build -t dictization-server .
+2. sudo docker run -p 5000:5000 dictization-server

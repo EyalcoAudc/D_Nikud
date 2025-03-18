@@ -4,15 +4,13 @@ FROM python:3.10
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy only requirements.txt first to leverage Docker cache
+COPY requirements.txt /app/requirements.txt
 
-# Install required dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV HF_ENDPOINT=https://hf-mirror.com
-
-# Expose the port that Flask runs on
+# Expose Flask port
 EXPOSE 5000
 
 # Define environment variable for Flask

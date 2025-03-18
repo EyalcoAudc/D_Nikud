@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  flask_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app  # Mounts the current directory into /app
+      - /app/__pycache__  # Ensures no pycache files are stored in the host
+    environment:
+      - HF_ENDPOINT=https://hf-mirror.com
+      - FLASK_APP=D_Nikud_server.py
+    ports:
+      - "5000:5000"
+    working_dir: /app
+    command: ["python", "D_Nikud_server.py"]
+    restart: unless-stopped

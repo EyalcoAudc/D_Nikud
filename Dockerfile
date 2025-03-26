@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable for Flask
-ENV FLASK_APP=D_Nikud_server.py
+ENV FLASK_APP=Nikud_server.py
 
 # Run the application
-CMD ["python", "D_Nikud_server.py"]
+CMD ["python", "Nikud_server.py"]

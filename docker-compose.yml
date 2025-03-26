@@ -10,9 +10,9 @@ services:
       - /app/__pycache__  # Ensures no pycache files are stored in the host
     environment:
       - HF_ENDPOINT=https://hf-mirror.com
-      - FLASK_APP=D_Nikud_server.py
+      - FLASK_APP=Nikud_server.py
     ports:
       - "5000:5000"
     working_dir: /app
-    command: ["python", "D_Nikud_server.py"]
+    command: ["python", "Nikud_server.py"]
     restart: unless-stopped

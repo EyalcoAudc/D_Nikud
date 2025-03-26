@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def send_request_to_D_Nikud(text, url="http://127.0.0.1:5000/predict"):
+def send_request_to_Nikud(text, url="http://127.0.0.1:5000/predict"):
     headers = {"Content-Type": "application/json"}
     data = json.dumps({"text": text})
 
@@ -17,5 +17,5 @@ def send_request_to_D_Nikud(text, url="http://127.0.0.1:5000/predict"):
 
 if __name__ == "__main__":
     sample_text = "האם בתאריך עשרים וחמישה ביוני, ביום שני, בשעה ארבע ארבעים וחמש, במרפאה ברחוב הנביאים 2, חיפה, יתאים לכם תור אצל דוקטור אביטל, מומחה לרפואת עיניים?"
-    out = send_request_to_D_Nikud(sample_text)
+    out = send_request_to_Nikud(sample_text)
     print(out)
